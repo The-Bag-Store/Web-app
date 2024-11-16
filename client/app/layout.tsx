@@ -1,6 +1,17 @@
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  ClerkLoaded,
+  ClerkLoading,
+} from "@clerk/nextjs";
+import { LoaderCircle } from "lucide-react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { LoadingSpinner } from "./load";
 import Navbar from "@/components/common/Navbar";
 
 const geistSans = localFont({
@@ -25,13 +36,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Navbar />
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <ClerkLoading>
+            <div className="flex items-center justify-center mt-10">
+              <LoadingSpinner />
+            </div>
+          </ClerkLoading>
+
+          <ClerkLoaded>
+            <Navbar />
+            {children}
+          </ClerkLoaded>
+          {/* <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          */}
+          {/* <SignedIn>
+            <UserButton />
+          </SignedIn> */}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
