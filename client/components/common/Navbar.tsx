@@ -1,26 +1,23 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useState } from 'react'
-import { Menu, ShoppingCart, User, Heart, Search } from 'lucide-react'
+import Link from "next/link";
+import { useState } from "react";
+import { Menu, ShoppingCart, User, Heart, Search } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Banner } from "@/components/common/Banner";
+import { Button } from "@/components/ui/button";
 
-export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+export default function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Toggle the menu
   const toggleMenu = () => {
-    setIsMenuOpen((prevState) => !prevState)
-  }
+    setIsMenuOpen((prevState) => !prevState);
+  };
 
   return (
     <>
-      {/* Offer Banner - Desktop Only */}
-      <div className="hidden md:flex justify-center items-center bg-red-500 text-white text-sm py-2">
-        <span>🔥 Get 20% off on your first order! Use code: FIRST20 🔥</span>
-      </div>
-
+      <Banner />
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 shadow-sm">
         <div className="container mx-auto px-4 lg:px-8 flex h-16 items-center justify-between md:justify-start">
           {/* Mobile View - Left: Toggle Button */}
@@ -109,14 +106,24 @@ export default function Header() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="block md:hidden px-4 py-2 bg-background/95 backdrop-blur-md">
-            <Link href="/shop" className="block py-2">Shop</Link>
-            <Link href="/new-arrivals" className="block py-2">New Arrivals</Link>
-            <Link href="/best-sellers" className="block py-2">Best Sellers</Link>
-            <Link href="/sale" className="block py-2">Sale</Link>
-            <Link href="/about" className="block py-2">About Us</Link>
+            <Link href="/shop" className="block py-2">
+              Shop
+            </Link>
+            <Link href="/new-arrivals" className="block py-2">
+              New Arrivals
+            </Link>
+            <Link href="/best-sellers" className="block py-2">
+              Best Sellers
+            </Link>
+            <Link href="/sale" className="block py-2">
+              Sale
+            </Link>
+            <Link href="/about" className="block py-2">
+              About Us
+            </Link>
           </div>
         )}
       </header>
     </>
-  )
+  );
 }
